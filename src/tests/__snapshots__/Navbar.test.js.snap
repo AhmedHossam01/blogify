@@ -1,0 +1,3 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render without error 1`] = `"<nav class=\\"navbar navbar-expand navbar-dark bg-dark\\"><div class=\\"container\\"><a href=\\"#home\\" class=\\"navbar-brand\\">Blogify</a><div class=\\"mr-auto navbar-nav\\"><a href=\\"#home\\" data-rb-event-key=\\"#home\\" class=\\"nav-link\\">Home</a></div><form class=\\"form-inline\\"><input placeholder=\\"Search\\" type=\\"text\\" class=\\"mr-sm-2 form-control\\"><button type=\\"button\\" class=\\"btn btn-outline-light\\">Search</button></form></div></nav>"`;
