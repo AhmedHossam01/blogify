@@ -8,8 +8,8 @@ export default class BlogPost extends Component {
       <Card style={{ width: "18rem" }}>
         <Card.Img variant="top" src="/image.jpg" />
         <Card.Body>
-          <Card.Title> {this.props.title} </Card.Title>
-          <Card.Text> {this.props.body} </Card.Text>
+          <Card.Title>{this.props.title}</Card.Title>
+          <Card.Text>{this.props.body}</Card.Text>
           <Button variant="dark" bg="dark">
             Read More
           </Button>
