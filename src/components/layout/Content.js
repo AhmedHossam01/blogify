@@ -3,8 +3,8 @@ import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import Sidebar from "./Sidebar";
-import BlogContainer from "../Blog/BlogContainer";
-import PaginationUI from "../Blog/PaginationUI";
+import BlogContainer from "../blog/BlogContainer";
+import PaginationUI from "../blog/PaginationUI";
 
 export default class Content extends Component {
   render() {

@@ -6,7 +6,7 @@ export default class BlogPost extends Component {
   render() {
     return (
       <Card style={{ width: "18rem" }}>
-        <Card.Img variant="top" src="/image.jpg" />
+        <Card.Img variant="top" src={this.props.picture} />
         <Card.Body>
           <Card.Title>{this.props.title}</Card.Title>
           <Card.Text>{this.props.body}</Card.Text>

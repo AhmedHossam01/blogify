@@ -1,24 +1,12 @@
 import React from "react";
 import { render, unmountComponentAtNode } from "react-dom";
-import { act } from "react-dom/test-utils";
 import Navbar from "../components/layout/Navbar";
 
-let container = null;
+describe("Navbar Component", () => {
+  const container = document.createElement("div");
 
-beforeEach(() => {
-  container = document.createElement("div");
-  document.body.appendChild(container);
-});
-
-afterEach(() => {
-  unmountComponentAtNode(container);
-  container.remove();
-  container = null;
-});
-
-it("should render without error", () => {
-  act(() => {
+  it("should match the snapshot", () => {
     render(<Navbar></Navbar>, container);
+    expect(container.innerHTML).toMatchSnapshot();
   });
-  expect(container.innerHTML).toMatchSnapshot();
 });

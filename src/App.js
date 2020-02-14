@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import AppBar from "./components/layout/Navbar";
 import Content from "./components/layout/Content";
 import axios from "axios";
-import { getPages } from "./Functions/paginate";
+import { getPages } from "./utils/paginate";
 
 class App extends Component {
   constructor(props) {
@@ -21,8 +21,7 @@ class App extends Component {
     axios.get(`https://jsonplaceholder.typicode.com/posts`).then(res => {
       const posts = res.data;
       const pages = getPages(posts);
-      this.setState({ posts });
-      this.setState({ pages });
+      this.setState({ posts, pages });
     });
   }
   render() {

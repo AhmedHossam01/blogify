@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import BlogPost from "./BlogPost";
 import CardColumns from "react-bootstrap/CardColumns";
-import { paginate } from "../../Functions/paginate";
+import { paginate } from "../../utils/paginate";
 
 export default class BlogContainer extends Component {
   render() {
@@ -14,6 +14,7 @@ export default class BlogContainer extends Component {
               key={post.id}
               title={post.title}
               body={post.body}
+              picture="image.jpg"
             ></BlogPost>
           );
         })}

@@ -1,14 +1,14 @@
-const numberPerPages = 6;
+const numberPerPage = 6;
 
 export const paginate = (posts, currentPage) => {
-  const firstIndex = numberPerPages * currentPage;
-  const lastIndex = firstIndex + numberPerPages;
+  const firstIndex = numberPerPage * currentPage;
+  const lastIndex = firstIndex + numberPerPage;
   const currentPosts = posts.slice(firstIndex, lastIndex);
   return currentPosts;
 };
 
 export const getNumbersOfPages = posts => {
-  const numberOfPages = Math.ceil(posts.length / numberPerPages);
+  const numberOfPages = Math.ceil(posts.length / numberPerPage);
   return numberOfPages;
 };
 
