@@ -23,10 +23,10 @@ describe("paginate function", () => {
     const expectedRes2 = ["7", "8", "9", "10", "11", "12"];
     const expectedRes3 = ["13", "14", "15"];
 
-    expect(paginate(posts, 0)).toEqual(expectedRes1);
-    expect(paginate(posts, 1)).toEqual(expectedRes2);
-    expect(paginate(posts, 2)).toEqual(expectedRes3);
+    expect(paginate(posts, 0, 6)).toEqual(expectedRes1);
+    expect(paginate(posts, 1, 6)).toEqual(expectedRes2);
+    expect(paginate(posts, 2, 6)).toEqual(expectedRes3);
 
-    expect(getPages(posts)).toEqual([0, 1, 2]);
+    expect(getPages(posts, 6)).toEqual([0, 1, 2]);
   });
 });

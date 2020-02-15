@@ -11,7 +11,8 @@ class App extends Component {
     this.state = {
       posts: [],
       currentPage: 0,
-      pages: []
+      pages: [],
+      numberPerPage: 6
     };
   }
 
@@ -20,7 +21,7 @@ class App extends Component {
   componentDidMount() {
     axios.get(`https://jsonplaceholder.typicode.com/posts`).then(res => {
       const posts = res.data;
-      const pages = getPages(posts);
+      const pages = getPages(posts, this.state.numberPerPage);
       this.setState({ posts, pages });
     });
   }
@@ -33,6 +34,7 @@ class App extends Component {
           currentPage={this.state.currentPage}
           changePage={this.changePage}
           pages={this.state.pages}
+          numberPerPage={this.state.numberPerPage}
         ></Content>
       </div>
     );

@@ -1,19 +1,16 @@
-const numberPerPage = 6;
-
-export const paginate = (posts, currentPage) => {
+export const paginate = (posts, currentPage, numberPerPage) => {
   const firstIndex = numberPerPage * currentPage;
   const lastIndex = firstIndex + numberPerPage;
   const currentPosts = posts.slice(firstIndex, lastIndex);
+
   return currentPosts;
 };
 
-export const getNumbersOfPages = posts => {
+export const getPages = (posts, numberPerPage) => {
+  if (!posts || !numberPerPage) {
+    return "Error: There's missing parameter";
+  }
   const numberOfPages = Math.ceil(posts.length / numberPerPage);
-  return numberOfPages;
-};
-
-export const getPages = posts => {
-  const numberOfPages = getNumbersOfPages(posts);
   let pages = [];
   for (let i = 0; i < numberOfPages; i++) {
     pages.push(i);

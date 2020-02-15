@@ -19,6 +19,7 @@ export default class Content extends Component {
               <BlogContainer
                 posts={this.props.posts}
                 currentPage={this.props.currentPage}
+                numberPerPage={this.props.numberPerPage}
               ></BlogContainer>
 
               <PaginationUI

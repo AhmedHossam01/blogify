@@ -5,7 +5,11 @@ import { paginate } from "../../utils/paginate";
 
 export default class BlogContainer extends Component {
   render() {
-    const currentPosts = paginate(this.props.posts, this.props.currentPage);
+    const currentPosts = paginate(
+      this.props.posts,
+      this.props.currentPage,
+      this.props.numberPerPage
+    );
     return (
       <CardColumns>
         {currentPosts.map(post => {
