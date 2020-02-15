@@ -36,10 +36,7 @@ export default class PaginationUI extends Component {
               </Pagination.Item>
             );
           })}
-          <Pagination.Next
-            data-testid="next"
-            onClick={this.nextPage}
-          ></Pagination.Next>
+          <Pagination.Next onClick={this.nextPage}></Pagination.Next>
           <Pagination.Last
             onClick={() => changePage(pages.length - 1)}
           ></Pagination.Last>
