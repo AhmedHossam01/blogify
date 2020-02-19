@@ -2,10 +2,6 @@ import React, { Component } from "react";
 import Pagination from "react-bootstrap/Pagination";
 
 export default class PaginationUI extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   prevPage = () => {
     if (this.props.currentPage > 0) {
       return this.props.changePage(this.props.currentPage - 1);
