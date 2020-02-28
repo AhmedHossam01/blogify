@@ -1,19 +1,20 @@
-export const paginate = (posts, currentPage, numberPerPage) => {
-  const firstIndex = numberPerPage * currentPage;
-  const lastIndex = firstIndex + numberPerPage;
-  const currentPosts = posts.slice(firstIndex, lastIndex);
+const paginate = {
+  getItems: (items, currentPage, numberPerPage) => {
+    const firstIndex = numberPerPage * currentPage;
+    const lastIndex = firstIndex + numberPerPage;
+    const currentitems = items.slice(firstIndex, lastIndex);
+    return currentitems;
+  },
 
-  return currentPosts;
+  getPages: (items, numberPerPage) => {
+    const numberOfPages = Math.ceil(items.length / numberPerPage);
+    let pages = [];
+    for (let i = 0; i < numberOfPages; i++) {
+      pages.push(i);
+    }
+
+    return pages;
+  }
 };
 
-export const getPages = (posts, numberPerPage) => {
-  if (!posts || !numberPerPage) {
-    return "Error: There's missing parameter";
-  }
-  const numberOfPages = Math.ceil(posts.length / numberPerPage);
-  let pages = [];
-  for (let i = 0; i < numberOfPages; i++) {
-    pages.push(i);
-  }
-  return pages;
-};
+export default paginate;

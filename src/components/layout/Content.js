@@ -26,7 +26,7 @@ export default class Content extends Component {
                 changePage={this.props.changePage}
                 posts={this.props.posts}
                 currentPage={this.props.currentPage}
-                pages={this.props.pages}
+                numberPerPage={this.props.numberPerPage}
               ></PaginationUI>
             </Col>
           </Row>

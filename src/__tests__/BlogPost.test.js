@@ -1,7 +1,7 @@
 import React from "react";
-import { render, unmountComponentAtNode } from "react-dom";
+import { render } from "react-dom";
 import { act } from "react-dom/test-utils";
-import BlogPost from "../components/Blog/BlogPost";
+import BlogPost from "../components/blog/BlogPost";
 
 describe("BlogPost component", () => {
   it("should render with assigned data", () => {
@@ -21,13 +21,7 @@ describe("BlogPost component", () => {
         ></BlogPost>,
         container
       );
-      expect(container.querySelector(".card-title").textContent).toBe(
-        fakePost.title
-      );
-
-      expect(container.querySelector(".card-text").textContent).toBe(
-        fakePost.body
-      );
+      expect(container).toMatchSnapshot();
     });
   });
 });

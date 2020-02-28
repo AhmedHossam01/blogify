@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`BlogPost component should render with assigned data 1`] = `
+<div>
+  <div
+    class="card"
+    style="width: 18rem;"
+  >
+    <img
+      class="card-img-top"
+    />
+    <div
+      class="card-body"
+    >
+      <div
+        class="card-title h5"
+      >
+        Lorem Ipsum
+      </div>
+      <p
+        class="card-text"
+      >
+        Lorem Ipsum Ist dolor sit
+      </p>
+      <button
+        bg="dark"
+        class="btn btn-dark"
+        type="button"
+      >
+        Read More
+      </button>
+    </div>
+  </div>
+</div>
+`;

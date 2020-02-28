@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import AppBar from "./components/layout/Navbar";
 import Content from "./components/layout/Content";
-import axios from "axios";
-import { getPages } from "./utils/paginate";
+import paginatin from "./utils/paginate";
+import { fetchPosts } from "./utils/services";
 
 class App extends Component {
   constructor(props) {
@@ -11,20 +11,21 @@ class App extends Component {
     this.state = {
       posts: [],
       currentPage: 0,
-      pages: [],
       numberPerPage: 6
     };
   }
 
   changePage = newPage => this.setState({ currentPage: newPage });
 
+  getPosts = async () => {
+    const posts = await fetchPosts();
+    this.setState({ posts });
+  };
+
   componentDidMount() {
-    axios.get(`https://jsonplaceholder.typicode.com/posts`).then(res => {
-      const posts = res.data;
-      const pages = getPages(posts, this.state.numberPerPage);
-      this.setState({ posts, pages });
-    });
+    this.getPosts();
   }
+
   render() {
     return (
       <div className="App">
@@ -33,7 +34,6 @@ class App extends Component {
           posts={this.state.posts}
           currentPage={this.state.currentPage}
           changePage={this.changePage}
-          pages={this.state.pages}
           numberPerPage={this.state.numberPerPage}
         ></Content>
       </div>

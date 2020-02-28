@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 import Pagination from "react-bootstrap/Pagination";
+import paginate from "../../utils/paginate";
 
 export default class PaginationUI extends Component {
+  getPages = () => {
+    return paginate.getPages(this.props.posts, this.props.numberPerPage);
+  };
+
   prevPage = () => {
     if (this.props.currentPage > 0) {
       return this.props.changePage(this.props.currentPage - 1);
@@ -9,13 +14,14 @@ export default class PaginationUI extends Component {
   };
 
   nextPage = () => {
-    if (this.props.currentPage < this.props.pages.length - 1) {
+    if (this.props.currentPage < this.getPages().length - 1) {
       return this.props.changePage(this.props.currentPage + 1);
     }
   };
 
   render() {
-    const { changePage, currentPage, pages } = this.props;
+    const { changePage, currentPage } = this.props;
+    const pages = this.getPages();
     return (
       <div>
         <Pagination>
