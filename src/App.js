@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import AppBar from "./components/layout/Navbar";
 import Content from "./components/layout/Content";
-import paginatin from "./utils/paginate";
 import { fetchPosts } from "./utils/services";
 
 class App extends Component {

@@ -1,7 +1,6 @@
 import React from "react";
-import { render } from "react-dom";
+import { mount } from "enzyme";
 import PaginationUI from "../components/blog/PaginationUI";
-import { act } from "@testing-library/react";
 import paginate from "../utils/paginate";
 
 describe("PaginationUI use paginate function and renders correctly", () => {
@@ -24,19 +23,15 @@ describe("PaginationUI use paginate function and renders correctly", () => {
   ];
 
   jest.spyOn(paginate, "getPages");
-  const container = document.createElement("div");
 
   it("calls paginate function correctly", () => {
-    act(() => {
-      render(
-        <PaginationUI
-          posts={fakePosts}
-          numberPerPage={6}
-          currentPage={0}
-        ></PaginationUI>,
-        container
-      );
-    });
+    const component = mount(
+      <PaginationUI
+        posts={fakePosts}
+        numberPerPage={6}
+        currentPage={0}
+      ></PaginationUI>
+    );
 
     // The paginate function is called one time
     expect(paginate.getPages.mock.calls.length).toBe(1);
@@ -46,7 +41,9 @@ describe("PaginationUI use paginate function and renders correctly", () => {
 
     // It's clear!
     expect(paginate.getPages).toHaveBeenCalledWith(fakePosts, 6);
-    expect(container).toMatchSnapshot();
+
+    expect(component).toMatchSnapshot();
     paginate.getPages.mockClear();
+    component.unmount();
   });
 });
