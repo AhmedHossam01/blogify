@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import BlogPost from "./BlogPost";
 import CardColumns from "react-bootstrap/CardColumns";
 import paginate from "../../utils/paginate";
+import { getAuthor } from "../../utils/queries";
 
 export default class BlogContainer extends Component {
   getPosts = () => {
@@ -13,8 +14,8 @@ export default class BlogContainer extends Component {
   };
 
   render() {
+    const { users } = this.props;
     const currentPosts = this.getPosts();
-
     return (
       <CardColumns>
         {currentPosts.map((post, index) => {
@@ -24,6 +25,7 @@ export default class BlogContainer extends Component {
               title={post.title}
               body={post.body}
               picture="image.jpg"
+              author={getAuthor(users, post.userId)}
             ></BlogPost>
           );
         })}

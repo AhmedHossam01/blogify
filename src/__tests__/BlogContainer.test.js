@@ -3,6 +3,18 @@ import { render, cleanup } from "@testing-library/react";
 import BlogContainer from "../components/blog/BlogContainer";
 import paginate from "../utils/paginate";
 import "@testing-library/jest-dom/extend-expect";
+import * as mockedQueries from "../utils/queries";
+
+jest.mock("../utils/queries", () => {
+  return {
+    getAuthor: jest.fn(() => {
+      return {
+        name: "Ahmed Hossam",
+        website: "www.facebook.com"
+      };
+    })
+  };
+});
 
 jest.mock("../utils/paginate", () => {
   return {
@@ -27,12 +39,13 @@ jest.mock("../utils/paginate", () => {
 });
 
 describe("Blog container use paginate function and renders correctly", () => {
-  it("calls paginate function correctly", () => {
+  it("calls paginate and getAuthor functions correctly and reenders posts and author data", () => {
     const { container } = render(
       <BlogContainer
         posts={"fake"}
         numberPerPage={6}
         currentPage={0}
+        users={["fake"]}
       ></BlogContainer>
     );
 
@@ -42,6 +55,11 @@ describe("Blog container use paginate function and renders correctly", () => {
     expect(container).toHaveTextContent(
       /est rerum tempore vitaesequi sint nihil reprehenderit dolor beatae ea dolores neque/i
     );
+
+    expect(mockedQueries.getAuthor).toHaveBeenCalledTimes(2);
+    expect(mockedQueries.getAuthor).toHaveBeenCalledWith(["fake"], 1);
+    expect(container).toHaveTextContent(/Ahmed Hossam/i);
+    expect(container).toHaveTextContent(/www.facebook.com/i);
 
     cleanup();
   });

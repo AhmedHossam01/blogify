@@ -3,6 +3,12 @@ import { render, cleanup } from "@testing-library/react";
 import Content from "../components/layout/Content";
 import "@testing-library/jest-dom/extend-expect";
 
+jest.mock("../utils/queries", () => {
+  return {
+    getAuthor: jest.fn(() => "fake")
+  };
+});
+
 jest.mock("../utils/paginate", () => {
   return {
     getPages: jest.fn(() => [0, 1]),
@@ -49,7 +55,7 @@ describe("Content Component", () => {
 
   it("should display real ouput when there's posts", () => {
     const { container } = render(
-      <Content appState={"success"} posts={["fake"]}></Content>
+      <Content appState={"success"} posts={["fake"]} users={["fake"]}></Content>
     );
 
     expect(container).toHaveTextContent(

@@ -15,6 +15,7 @@ describe("BlogPost component", () => {
         title={fakePost.title}
         id={fakePost.id}
         body={fakePost.body}
+        author={"fake"}
       ></BlogPost>
     );
 

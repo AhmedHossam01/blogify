@@ -22,6 +22,7 @@ export default class Content extends Component {
           posts={this.props.posts}
           currentPage={this.props.currentPage}
           numberPerPage={this.props.numberPerPage}
+          users={this.props.users}
         ></BlogContainer>
       );
     }
