@@ -1,49 +1,55 @@
 import React from "react";
-import { mount } from "enzyme";
+import { render, cleanup, wait, fireEvent } from "@testing-library/react";
 import PaginationUI from "../components/blog/PaginationUI";
 import paginate from "../utils/paginate";
 
+jest.mock("../utils/paginate", () => {
+  return {
+    getPages: jest.fn(() => [0, 1, 2, 3, 4])
+  };
+});
+
 describe("PaginationUI use paginate function and renders correctly", () => {
-  const fakePosts = [
-    {
-      userId: 1,
-      id: 1,
-      title:
-        "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-      body:
-        "quia et suscipitsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-    },
-    {
-      userId: 1,
-      id: 2,
-      title: "qui est esse",
-      body:
-        "est rerum tempore vitaesequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
-    }
-  ];
-
-  jest.spyOn(paginate, "getPages");
-
-  it("calls paginate function correctly", () => {
-    const component = mount(
+  it("calls paginate getPages function correctly and render pages", async () => {
+    const { getByTestId } = render(
       <PaginationUI
-        posts={fakePosts}
+        posts={"fake"}
         numberPerPage={6}
         currentPage={0}
       ></PaginationUI>
     );
 
-    // The paginate function is called one time
-    expect(paginate.getPages.mock.calls.length).toBe(1);
+    expect(paginate.getPages).toBeCalledTimes(1);
+    expect(paginate.getPages).toBeCalledWith("fake", 6);
 
-    // The first argument of the first call of this function was fakePosts
-    expect(paginate.getPages.mock.calls[0][0]).toBe(fakePosts);
+    await wait(() => {
+      expect(getByTestId("pagination")).toHaveTextContent("12");
+    });
 
-    // It's clear!
-    expect(paginate.getPages).toHaveBeenCalledWith(fakePosts, 6);
+    cleanup();
+  });
 
-    expect(component).toMatchSnapshot();
-    paginate.getPages.mockClear();
-    component.unmount();
+  it("interacts with user correctly", () => {
+    const mockChange = jest.fn(number => number);
+    const { getByTestId } = render(
+      <PaginationUI
+        posts={"fake"}
+        numberPerPage={6}
+        currentPage={0}
+        changePage={mockChange}
+      ></PaginationUI>
+    );
+    const nextPage = getByTestId("nextPage");
+    const lastPage = getByTestId("lastPage");
+    const firstPage = getByTestId("firstPage");
+    fireEvent.click(nextPage);
+    expect(mockChange).toBeCalledWith(1);
+
+    fireEvent.click(lastPage);
+    expect(mockChange).toBeCalledWith(4);
+
+    fireEvent.click(firstPage);
+    expect(mockChange).toBeCalledWith(0);
+    cleanup();
   });
 });

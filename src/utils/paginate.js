@@ -14,6 +14,10 @@ const paginate = {
     }
 
     return pages;
+  },
+
+  changePage: (newPage, callback) => {
+    callback(newPage);
   }
 };
 

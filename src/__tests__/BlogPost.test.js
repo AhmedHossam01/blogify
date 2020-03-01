@@ -1,6 +1,5 @@
 import React from "react";
-import { render } from "react-dom";
-import { act } from "react-dom/test-utils";
+import { render } from "@testing-library/react";
 import BlogPost from "../components/blog/BlogPost";
 
 describe("BlogPost component", () => {
@@ -11,17 +10,16 @@ describe("BlogPost component", () => {
       body: "Lorem Ipsum Ist dolor sit"
     };
 
-    act(() => {
-      const container = document.createElement("div");
-      render(
-        <BlogPost
-          key={fakePost.id}
-          title={fakePost.title}
-          body={fakePost.body}
-        ></BlogPost>,
-        container
-      );
-      expect(container).toMatchSnapshot();
-    });
+    const { container } = render(
+      <BlogPost
+        title={fakePost.title}
+        id={fakePost.id}
+        body={fakePost.body}
+      ></BlogPost>
+    );
+
+    expect(container).toHaveTextContent(
+      /Lorem IpsumLorem Ipsum Ist dolor sit/i
+    );
   });
 });

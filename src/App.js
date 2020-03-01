@@ -10,19 +10,20 @@ class App extends Component {
     this.state = {
       posts: [],
       currentPage: 0,
-      numberPerPage: 6
+      numberPerPage: 6,
+      appState: "loading",
+      errorMessage: ""
     };
   }
 
   changePage = newPage => this.setState({ currentPage: newPage });
 
-  getPosts = async () => {
-    const posts = await fetchPosts();
-    this.setState({ posts });
-  };
-
   componentDidMount() {
-    this.getPosts();
+    fetchPosts()
+      .then(posts => {
+        this.setState({ posts, appState: "success" });
+      })
+      .catch(e => this.setState({ appState: "error", errorMessage: e }));
   }
 
   render() {
@@ -34,6 +35,8 @@ class App extends Component {
           currentPage={this.state.currentPage}
           changePage={this.changePage}
           numberPerPage={this.state.numberPerPage}
+          appState={this.state.appState}
+          errorMessage={this.state.errorMessage}
         ></Content>
       </div>
     );

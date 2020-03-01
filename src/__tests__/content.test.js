@@ -1,11 +1,11 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
-import BlogContainer from "../components/blog/BlogContainer";
-import paginate from "../utils/paginate";
+import Content from "../components/layout/Content";
 import "@testing-library/jest-dom/extend-expect";
 
 jest.mock("../utils/paginate", () => {
   return {
+    getPages: jest.fn(() => [0, 1]),
     getItems: jest.fn(() => [
       {
         userId: 1,
@@ -26,18 +26,35 @@ jest.mock("../utils/paginate", () => {
   };
 });
 
-describe("Blog container use paginate function and renders correctly", () => {
-  it("calls paginate function correctly", () => {
+describe("Content Component", () => {
+  it("should display error message when appState is error", () => {
     const { container } = render(
-      <BlogContainer
-        posts={"fake"}
-        numberPerPage={6}
-        currentPage={0}
-      ></BlogContainer>
+      <Content appState={"error"} errorMessage={"error 404"}></Content>
     );
 
-    expect(paginate.getItems).toHaveBeenCalledTimes(1);
-    expect(paginate.getItems).toHaveBeenCalledWith("fake", 0, 6);
+    expect(container).toHaveTextContent(/error 404/i);
+
+    cleanup();
+  });
+
+  it("should display no posts when there's empty posts passed and success state", () => {
+    const { container } = render(
+      <Content appState={"success"} posts={[]}></Content>
+    );
+
+    expect(container).toHaveTextContent(/no posts/i);
+
+    cleanup();
+  });
+
+  it("should display real ouput when there's posts", () => {
+    const { container } = render(
+      <Content appState={"success"} posts={["fake"]}></Content>
+    );
+
+    expect(container).toHaveTextContent(
+      /sunt aut facere repellat provident occaecati excepturi optio reprehenderit/i
+    );
 
     expect(container).toHaveTextContent(
       /est rerum tempore vitaesequi sint nihil reprehenderit dolor beatae ea dolores neque/i
