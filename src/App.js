@@ -10,12 +10,16 @@ class App extends Component {
     this.state = {
       posts: [],
       users: [],
-      currentPage: 3, // It can be changed to any value.. Just for demonstration
-      numberPerPage: 6,
+      currentPage: 0,
+      numberPerPage: 6, // It can be changed to any value..
       appState: "loading",
-      errorMessage: ""
+      errorMessage: "",
+      searchQuery: ""
     };
   }
+
+  changeSearchQuery = newSearhQuery =>
+    this.setState({ searchQuery: newSearhQuery });
 
   changePage = newPage => this.setState({ currentPage: newPage });
 
@@ -32,7 +36,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <AppBar></AppBar>
+        <AppBar changeSearchQuery={this.changeSearchQuery}></AppBar>
         <Content
           posts={this.state.posts}
           currentPage={this.state.currentPage}
@@ -41,6 +45,7 @@ class App extends Component {
           appState={this.state.appState}
           errorMessage={this.state.errorMessage}
           users={this.state.users}
+          searchQuery={this.state.searchQuery}
         ></Content>
       </div>
     );

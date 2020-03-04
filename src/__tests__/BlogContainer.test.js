@@ -53,7 +53,7 @@ describe("Blog container use paginate function and renders correctly", () => {
     expect(paginate.getItems).toHaveBeenCalledWith("fake", 0, 6);
 
     expect(container).toHaveTextContent(
-      /est rerum tempore vitaesequi sint nihil reprehenderit dolor beatae ea dolores neque/i
+      /sunt aut facere repellat provident occaecati excepturi optio reprehenderit/i
     );
 
     expect(mockedQueries.getAuthor).toHaveBeenCalledTimes(2);

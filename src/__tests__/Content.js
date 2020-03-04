@@ -5,7 +5,16 @@ import "@testing-library/jest-dom/extend-expect";
 
 jest.mock("../utils/queries", () => {
   return {
-    getAuthor: jest.fn(() => "fake")
+    getAuthor: jest.fn(() => "fake"),
+    getSearchResult: jest.fn(() => {
+      return {
+        userId: 1,
+        id: 2,
+        title: "qui est esse",
+        body:
+          "est rerum tempore vitaesequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+      };
+    })
   };
 });
 
@@ -49,22 +58,6 @@ describe("Content Component", () => {
     );
 
     expect(container).toHaveTextContent(/no posts/i);
-
-    cleanup();
-  });
-
-  it("should display real ouput when there's posts", () => {
-    const { container } = render(
-      <Content appState={"success"} posts={["fake"]} users={["fake"]}></Content>
-    );
-
-    expect(container).toHaveTextContent(
-      /sunt aut facere repellat provident occaecati excepturi optio reprehenderit/i
-    );
-
-    expect(container).toHaveTextContent(
-      /est rerum tempore vitaesequi sint nihil reprehenderit dolor beatae ea dolores neque/i
-    );
 
     cleanup();
   });

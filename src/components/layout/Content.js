@@ -5,24 +5,43 @@ import Col from "react-bootstrap/Col";
 import Sidebar from "./Sidebar";
 import BlogContainer from "../blog/BlogContainer";
 import PaginationUI from "../blog/PaginationUI";
+import { getSearchResult } from "../../utils/queries";
 
 export default class Content extends Component {
   render() {
+    const {
+      appState,
+      posts,
+      currentPage,
+      numberPerPage,
+      users,
+      pages,
+      errorMessage,
+      changePage,
+      searchQuery
+    } = this.props;
+
+    const outputPosts = getSearchResult(posts, searchQuery)
+      ? getSearchResult(posts, searchQuery)
+      : posts;
+
     let BlogOutput = null;
 
-    if (this.props.appState === "loading") {
+    if (appState === "loading") {
       BlogOutput = <div>Loading...</div>;
-    } else if (this.props.appState === "error") {
-      BlogOutput = <div>Something went wrong: {this.props.errorMessage}</div>;
-    } else if (this.props.appState === "success" && !this.props.posts.length) {
+    } else if (appState === "error") {
+      BlogOutput = <div>Something went wrong: {errorMessage}</div>;
+    } else if (appState === "success" && !posts.length) {
       BlogOutput = <div>No Posts</div>;
+    } else if (!outputPosts.length && posts.length) {
+      BlogOutput = <div>No search result found.</div>;
     } else {
       BlogOutput = (
         <BlogContainer
-          posts={this.props.posts}
-          currentPage={this.props.currentPage}
-          numberPerPage={this.props.numberPerPage}
-          users={this.props.users}
+          posts={outputPosts}
+          currentPage={currentPage}
+          numberPerPage={numberPerPage}
+          users={users}
         ></BlogContainer>
       );
     }
@@ -38,11 +57,11 @@ export default class Content extends Component {
               {BlogOutput}
 
               <PaginationUI
-                changePage={this.props.changePage}
-                posts={this.props.posts}
-                currentPage={this.props.currentPage}
-                numberPerPage={this.props.numberPerPage}
-                pages={this.props.pages}
+                changePage={changePage}
+                posts={outputPosts}
+                currentPage={currentPage}
+                numberPerPage={numberPerPage}
+                pages={pages}
               ></PaginationUI>
             </Col>
           </Row>
