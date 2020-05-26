@@ -1,6 +1,7 @@
 # Blogify
-Live Preview: [https://blogifyapp.netlify.app/](https://blogifyapp.netlify.app/).
 A simple blog client w/React and Unit Testing with (Jest, Enzyme, React Testing Library). The goal of this project is to demonstrate my unit testing skills.
+
+Live Preview: [https://blogifyapp.netlify.app/](https://blogifyapp.netlify.app/)\
 
 **Homepage**
 ![image](https://user-images.githubusercontent.com/50014916/82883571-e7923c80-9f42-11ea-8335-9da9e290d274.png)
